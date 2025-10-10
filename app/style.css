@@ -1,0 +1,148 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about, .details {
+  flex: 1;
+  margin: 20px;
+}
+
+.about h2, .details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.about p, .details ul {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.details ul li {
+  margin-bottom: 10px;
+}
+
+.profile-picture {
+  flex: 0 0 150px;
+  margin: 20px;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
+}
+
+.social-media {
+  margin-top: 10px;
+}
+
+.social-media a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-media img {
+  width: 24px;
+  height: 24px;
+}
+
+
+button a {
+  background-color: #ADD8E6; /* Azul claro */
+  color: white;
+  border: none;
+  padding: 15px 30px; /* Aumentado */
+  font-size: 18px; /* Texto maior */
+  cursor: pointer;
+  border-radius: 8px; /* Arredondamento mais suave */
+  
+}
+
+button:hover {
+  background-color: #87CEFA; /* Azul claro mais intenso ao passar o mouse */
+  
+}
+
+button:focus {
+  outline: none; 
+  box-shadow: 0 0 5px #87CEFA; /* Destaque ao focar */
+  
+}
+i {
+  font-size: 15px; /* Ajusta o tamanho */
+  color: #45687e; /* Ajusta a cor */
+}
+
+.social-media {
+  display: flex; /* Ativa o layout flexbox */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  gap: 20px; /* Espaçamento entre os links */
+  margin-top: 10px;
+}
+
+.social-media a {
+  display: flex;
+  align-items: center; /* Alinha ícone e texto verticalmente */
+  text-decoration: none; /* Remove sublinhado */
+  color: #45687e; /* Cor padrão do texto */
+  font-family: Arial, sans-serif; /* Mesma fonte do site */
+  font-size: 1rem;
+}
+
+.social-media a i {
+  margin-right: 8px; /* Espaço entre ícone e texto */
+  font-size: 1.5rem; /* Tamanho do ícone */
+  color: #45687e; /* Cor do ícone */
+}
+
+.social-media a:hover i {
+  color: #2557c4; /* Azul claro ao passar o mouse no ícone */
+}
+
+.social-media a:hover span {
+  color: #2557c4; /* Azul claro ao passar o mouse no texto */
+}
