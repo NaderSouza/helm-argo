@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grade-submission
+  name: nhs
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/NaderSouza/helm-argo.git
     targetRevision: HEAD
-    path: gitops/basic
+    path: gitops
   destination:
     server: https://kubernetes.default.svc
-    namespace: grade-demo
+    namespace: nhs-demo
   syncPolicy:
     automated:
       prune: true

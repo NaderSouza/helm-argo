@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grade-submission-api
+  name: nhs-api
   namespace: grade-demo
   labels:
-    app: grade-submission
+    app: nhs
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: grade-submission
+      app: nhs
   template:
     metadata:
       labels:
-        app: grade-submission
+        app: nhs
     spec:
       containers:
-      - name: grade-submission-api
+      - name: nhs-api
         image: naderhs/page-nhs-kube:latest
         ports:
         - containerPort: 3000
