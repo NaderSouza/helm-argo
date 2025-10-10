@@ -1,22 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: helm-argo-api
-  namespace: helm-argo-demo
-  labels:
-    app: helm-argo
+  name: grade-submission-api
+  namespace: grade-demo
 spec:
-  replicas: 3
+  type: NodePort
   selector:
-    matchLabels:
-      app: helm-argo
-  template:
-    metadata:
-      labels:
-        app: helm-argo
-    spec:
-      containers:
-      - name: helm-argo-api
-        image: naderhs/page-nhs-kube:latest
-        ports:
-        - containerPort: 3000
+    app: grade-submission
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 31000

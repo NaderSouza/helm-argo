@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-argo-helm
+  name: grade-submission-helm
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/NaderSouza/helm-argo.git
     targetRevision: HEAD
-    path: helm
+    path: helm/grade-submission
     helm:
       valueFiles:
       - values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: helm-argo-demo
+    namespace: grade-helm-demo
   syncPolicy:
     automated:
       prune: true
