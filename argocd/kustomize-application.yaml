@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grade-submission-dev
+  name: nhs-dev
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
     path: kustomize/overlays/dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: grade-demo
+    namespace: nhs-demo
   syncPolicy:
     automated:
       prune: true

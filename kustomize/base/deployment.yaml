@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nhs-api
+  namespace: nhs-demo
+  labels:
+    app: nhs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nhs
+  template:
+    metadata:
+      labels:
+        app: nhs
+    spec:
+      containers:
+      - name: nhs-api
+        image: naderhs/page-nhs-kube:latest
+        ports:
+        - containerPort: 3000
