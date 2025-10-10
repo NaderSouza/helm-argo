@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nhs-api
-  namespace: grade-demo
+  namespace: nhs-demo
 spec:
   type: NodePort
   selector:
