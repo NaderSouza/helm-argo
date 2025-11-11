@@ -19,7 +19,7 @@ O fluxo esperado é:
 
 ## Preparando o ambiente local
 
-1. **Criar o cluster KinD (opcional, para testes locais)**
+1. **Criar o cluster Kind (opcional, testes locais)**
 
    ```bash
    kind create cluster --config k8s/kind-config.yaml
@@ -55,7 +55,7 @@ Cada manifest cria uma instância de `Application`:
 
 Todos os manifests habilitam `automated.prune` e `automated.selfHeal`, permitindo que o Argo CD converja automaticamente para o estado definido no Git.
 
-## Próximos passos sugeridos
+## Próximos passos
 
 - Criar um pipeline CI/CD que construa e publique a imagem de `app/` e atualize os manifests.
 - Adicionar diretórios Kustomize (`kustomize/base` e `kustomize/overlays`) para completar o exemplo de Kustomize.
