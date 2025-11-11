@@ -67,6 +67,3 @@ Todos os manifests habilitam `automated.prune` e `automated.selfHeal`, permitind
 - Kubectl, Kind e Helm instalados localmente para testes.
 - Um cluster Kubernetes com Argo CD quando for realizar o fluxo GitOps completo.
 
-## Licença
-
-Este projeto não define uma licença explícita; ajuste conforme a necessidade do seu ambiente.
