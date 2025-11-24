@@ -4,4 +4,4 @@ metadata:
   name: nhs-api
   namespace: nhs-demo
 spec:
-  replicas: 2
+  replicas: 8
