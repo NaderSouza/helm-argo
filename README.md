@@ -41,9 +41,16 @@ Este repositório reúne um exemplo completo de GitOps para publicar uma aplica�
    - `gitops/deployment.yaml`: ajustar `image:` para apontar para a imagem publicada.
    - `helm/nginx-chart/values.yaml`: alterar `image.repository` e `image.tag` conforme necessário.
 
-## Registrando aplicações no Argo CD
+## Instalando o ArgoCD no Cluster
 
-Com o Argo CD já instalado no cluster, aplique um dos manifests a seguir:
+```
+helm repo add argo https://argoproj.github.io/argo-helm
+helm repo update
+kubectl create namespace argocd
+helm install argocd argo/argo-cd --namespace argocd
+```
+
+## Registrando aplicações no Argo CD
 
 ```bash
 kubectl apply -f argocd/basic-application.yaml
