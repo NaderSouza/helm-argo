@@ -47,11 +47,11 @@ Com o Argo CD já instalado no cluster, aplique um dos manifests a seguir:
 
 ```bash
 kubectl apply -f argocd/basic-application.yaml
-kubectl apply -f argocd/helm-application.yaml
+kubectl apply -f helm/nginx-chart/helm-application.yaml
 kubectl apply -f argocd/kustomize-application.yaml
-kubectl apply -f argocd/prometheus-application.yaml
-kubectl apply -f argocd/grafana-application.yaml
-kubectl apply -f argocd/opentelemetry-application.yaml
+kubectl apply -f prometheus/prometheus-application.yaml
+kubectl apply -f grafana/grafana-application.yaml
+kubectl apply -f otel/opentelemetry-application.yaml
 ```
 
 Cada manifest cria uma instância de `Application`:
