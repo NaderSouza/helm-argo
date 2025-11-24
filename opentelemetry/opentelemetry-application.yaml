@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: opentelemetry-collector
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://open-telemetry.github.io/opentelemetry-helm-charts"
+    chart: opentelemetry-collector
+    targetRevision: "latest"
+    helm:
+      values: |
+        mode: deployment
+        config:
+          exporters:
+            prometheus:
+              endpoint: "0.0.0.0:8889"
+          receivers:
+            otlp:
+              protocols:
+                grpc:
+                http:
+          service:
+            pipelines:
+              metrics:
+                receivers: [otlp]
+                exporters: [prometheus]
+        service:
+          type: NodePort
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
