@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/NaderSouza/helm-argo.git
     targetRevision: HEAD
-    path: helm
+    path: helm/nginx-chart
     helm:
       valueFiles:
       - values.yaml
