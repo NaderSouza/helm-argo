@@ -9,13 +9,17 @@ Este repositório reúne um exemplo completo de GitOps para publicar uma aplica�
 - **helm/**: chart Helm minimalista (`nginx-chart`) parametrizando um deployment Nginx com ênfase em disponibilidade (réplicas, probes, etc.).
 - **argocd/**: definições de `Application` do Argo CD que apontam para cada estratégia (manifests, Helm e Kustomize), habilitando sincronização automática, _pruning_ e criação de namespace.
 - **k8s/**: configuração de cluster Kind com um nó de controle e um nó worker, pronta para executar workloads e ingressos locais.
+- **kustomize/**: exemplo de overlays para ambientes dev/prod usando Kustomize.
+- **monitoramento:**
+  - **Prometheus, Grafana e OpenTelemetry Collector** instalados via Helm e gerenciados pelo ArgoCD, monitorando o cluster e aplicações.
 
-O fluxo esperado é:
+## O que foi feito recentemente
 
-1. Desenvolver ou ajustar a aplicação estática em `app/` e gerar uma imagem container.
-2. Publicar essa imagem em um registro e referenciá-la nos manifests ou valores Helm.
-3. Registrar o repositório no Argo CD utilizando um dos manifests da pasta `argocd/`.
-4. O Argo CD criará o namespace de destino, aplicará os manifests e manterá o estado desejado através de sincronização automática.
+- Adição dos manifests do ArgoCD para Prometheus, Grafana e OpenTelemetry Collector em `argocd/`.
+- Configuração do Prometheus e Grafana para monitorar o cluster local e integrar com o ArgoCD.
+- Configuração do OpenTelemetry Collector para coletar métricas do Kubernetes e exportar para o Prometheus.
+- Ajuste dos manifests para uso correto das versões dos charts e sintaxe YAML.
+- Passo a passo para acesso aos dashboards e verificação das métricas do cluster.
 
 ## Preparando o ambiente local
 
@@ -45,6 +49,9 @@ Com o Argo CD já instalado no cluster, aplique um dos manifests a seguir:
 kubectl apply -f argocd/basic-application.yaml
 kubectl apply -f argocd/helm-application.yaml
 kubectl apply -f argocd/kustomize-application.yaml
+kubectl apply -f argocd/prometheus-application.yaml
+kubectl apply -f argocd/grafana-application.yaml
+kubectl apply -f argocd/opentelemetry-application.yaml
 ```
 
 Cada manifest cria uma instância de `Application`:
@@ -52,8 +59,23 @@ Cada manifest cria uma instância de `Application`:
 - `basic-application.yaml`: sincroniza a pasta `gitops/`, entregando os manifests estáticos no namespace `nhs-demo`.
 - `helm-application.yaml`: renderiza o chart de `helm/` no namespace `nhs-helm-demo`, usando `values.yaml` como arquivo de valores.
 - `kustomize-application.yaml`: referencia uma base Kustomize em `kustomize/overlays/dev` (adicione os arquivos correspondentes se desejar utilizar este fluxo).
+- `prometheus-application.yaml`: instala o Prometheus no namespace `monitoring` via Helm.
+- `grafana-application.yaml`: instala o Grafana no namespace `monitoring` via Helm, já integrado ao Prometheus.
+- `opentelemetry-application.yaml`: instala o OpenTelemetry Collector para coletar métricas do cluster e enviar ao Prometheus.
 
 Todos os manifests habilitam `automated.prune` e `automated.selfHeal`, permitindo que o Argo CD converja automaticamente para o estado definido no Git.
+
+## Como acessar os dashboards de monitoramento
+
+1. Descubra as portas NodePort dos serviços:
+   ```bash
+   kubectl get svc -n monitoring
+   ```
+2. Acesse via browser:
+   - Prometheus: `kubectl port-forward svc/prometheus-server -n monitoring 9090:80`
+   - Grafana: `kubectl port-forward svc/grafana -n monitoring 3000:80`
+   - OpenTelemetry Collector: normalmente não tem UI, mas pode expor métricas em `/metrics`.
+3. No Grafana, importe dashboards prontos para Kubernetes (exemplo: ID 6417).
 
 ## Próximos passos
 
@@ -66,4 +88,3 @@ Todos os manifests habilitam `automated.prune` e `automated.selfHeal`, permitind
 - Docker ou outra ferramenta compatível para build de containers.
 - Kubectl, Kind e Helm instalados localmente para testes.
 - Um cluster Kubernetes com Argo CD quando for realizar o fluxo GitOps completo.
-
